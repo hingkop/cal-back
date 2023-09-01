@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import Account
+from accounts.models import Account
 # Create your models here.
 
 # 사용자별 업로드 정보
@@ -8,10 +8,10 @@ class Gallery(models.Model):
     image_id = models.AutoField(primary_key=True) # 음식 이미지 번호
     name = models.CharField(max_length=30, blank=True, null=False) # 음식 이름
     total = models.CharField(max_length=10, blank=True, null=True) # 음식 총량
-    kcal = models.CharField(max_length=10, blank=True, null=True) # 칼로리
-    carbon = models.CharField(max_length=10, blank=True, null=True) # 탄수화물
-    pro = models.CharField(max_length=10, blank=True, null=True) # 단백질
-    fat = models.CharField(max_length=10, blank=True, null=True) # 지방
+    kcal = models.IntegerField(blank=True, null=True)  # IntegerField로 변경
+    carbon = models.IntegerField(blank=True, null=True)  # IntegerField로 변경
+    pro = models.IntegerField(blank=True, null=True)  # IntegerField로 변경
+    fat = models.IntegerField(blank=True, null=True)  # IntegerField로 변경
     upload_date = models.DateTimeField(auto_now_add=True) # 이미지 업로드 날짜
     food_image = models.ImageField(upload_to="media/", blank=True, null=True) # 음식 이미지 파일
 

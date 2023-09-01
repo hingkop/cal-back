@@ -16,9 +16,55 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf.urls.static import static
+from django.conf import settings
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework import permissions
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.static import serve
+from accounts.views import *
+import os
+from main import views
 
 urlpatterns = [
+    # 관리자 페이지
     path('admin/', admin.site.urls),
-    
-]
+
+    # API 요청(/api 로 시작)
+    path('api/', include('api.urls')),
+
+    # 웹페이지
+    path('', TemplateView.as_view(template_name='index.html')), # 메인 화면
+    path('login/', TemplateView.as_view(template_name='index.html')), # 로그인 화면
+    path('join/', TemplateView.as_view(template_name='index.html')), # 회원가입 화면
+    path('success/', TemplateView.as_view(template_name='index.html')),
+    path('Mypage/', TemplateView.as_view(template_name='index.html')),
+    # 식단 업로드
+    path('calendar/', TemplateView.as_view(template_name='index.html')),
+    path('calendar/<str:date>', TemplateView.as_view(template_name='index.html')), # 특정 날짜 선택
+
+    path('daily/', TemplateView.as_view(template_name='index.html')), # Daily 식단
+    path('stats/', TemplateView.as_view(template_name='index.html')), # 식단 통계
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#path('login/', serve, {'document_root': settings.STATIC_ROOT, 'path': 'capstone-cra/build/index.html'}),
+
+
+#if settings.DEBUG:
+    #urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+#STATIC_URL = '/static/'
+
+#STATICFILES_DIRS = [
+    #os.path.join(BASE_DIR, 'static'),
+    #os.path.join(BASE_DIR, 'static/capstone-cra/build')
+#]
+
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'staticfiles')
+
+#STATICFILES_EXCLUDE = [
+    #'node_modules',
+#]
