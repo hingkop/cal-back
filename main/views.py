@@ -1,7 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render
 from accounts.views import validate_token
 from accounts.views import get_id_from_token
 from django.http import JsonResponse
@@ -465,3 +462,10 @@ def calculator(userid): # 권장 섭취량(칼로리, 탄수화물, 단백질, �
     # 지방(전체 섭취량의 25%)
     rec_fat = int(rec_kcal * 0.25 / 9)
     return [rec_kcal, rec_carbon, rec_pro, rec_fat]
+
+
+
+
+
+
+

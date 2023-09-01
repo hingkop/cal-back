@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import Account
+from accounts.models import Account
 # Create your models here.
 
 # 사용자별 업로드 정보
